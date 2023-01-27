@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { GlobalStyle } from "./common/globalStyles";
+import { theme } from "./common/theme";
+import { ThemeProvider } from "styled-components";
+import { createHashRouter, RouterProvider } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Settings } from "./pages/Settings";
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
+]);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </div>
   );
 }
